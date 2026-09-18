@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Syne", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink: #0a0a0a;
+  --color-paper: #f6f6f4;
+
+  --animate-marquee: marquee 34s linear infinite;
+  --animate-marquee-slow: marquee 60s linear infinite;
+  --animate-rotate-slow: rotate360 18s linear infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+  @keyframes rotate360 {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+@utility text-outline-w {
+  -webkit-text-stroke: 2px rgb(246 246 244 / 0.9);
+  color: transparent;
+}
+
+@utility text-outline-w-thin {
+  -webkit-text-stroke: 1px rgb(246 246 244 / 0.55);
+  color: transparent;
+}
+
+@utility text-outline-k {
+  -webkit-text-stroke: 2px rgb(10 10 10 / 0.85);
+  color: transparent;
+}
+
+@utility text-outline-k-thin {
+  -webkit-text-stroke: 1px rgb(10 10 10 / 0.5);
+  color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+img {
+  user-select: none;
+}
+
+::selection {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.on-dark ::selection {
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+/* Hide native cursor when the custom cursor is active (fine pointers only) */
+@media (hover: hover) and (pointer: fine) {
+  .cursor-none-fine,
+  .cursor-none-fine * {
+    cursor: none !important;
+  }
+}
+
+/* Pause marquees on hover */
+.marquee:hover .animate-marquee,
+.marquee:hover .animate-marquee-slow {
+  animation-play-state: paused;
+}
+
+/* Film grain overlay */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-size: 240px 240px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Slim monochrome scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+  background: #2e2e2e;
+  border: 2px solid #0a0a0a;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #f6f6f4;
+}
